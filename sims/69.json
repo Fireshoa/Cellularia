@@ -1,0 +1,84 @@
+{
+    "cells": [
+        [11,0,"Flipper"],
+        [-11,0,"Flipper"],
+        [0,0,"CellA"],
+        [-11,-1,"CellA"],
+        [11,1,"CellA"],
+        [-12,1,"Flipper"],
+        [12,1,"Flipper"],
+        [12,-1,"Flipper"],
+        [-12,-1,"Flipper"]
+    ],
+    "types":{
+        "CellA": {
+            "color": "black",
+            "reactions": {
+                "Split": [
+                    ["broadcast", "Travel"],
+                    ["create", "left", "CellB"],
+                    ["create", "right", "CellC"],
+                    ["create", "up", "Trailer"],
+                    ["create", "down", "Trailer"],
+                    ["die"]
+                ]
+            }
+        },
+        "Trailer": {
+            "color": "grey",
+            "reactions": {
+                "Travel": [
+                    ["die"]
+                ]
+            }
+        },
+        "CellB": {
+            "color": "blue",
+            "reactions": {
+                "Travel": [
+                    ["broadcast", "Travel"],
+                    ["create", "left", "CellB"],
+                    ["create", "up", "Trailer"],
+                    ["create", "right", "Trailer"],
+                    ["create", "down", "Trailer"],
+                    ["die"]
+                ],
+                "Split": [
+                    ["become", "CellC"]
+                ]
+            }
+        },
+        "CellC": {
+            "color": "green",
+            "reactions": {
+                "Travel": [
+                    ["broadcast", "Travel"],
+                    ["create", "right", "CellC"],
+                    ["create", "up", "Trailer"],
+                    ["create", "left", "Trailer"],
+                    ["create", "down", "Trailer"],
+                    ["die"]
+                ],
+                "Split": [
+                    ["become", "CellB"]
+                ]
+            }
+        },
+        "Flipper": {
+            "color": "brown",
+            "reactions": {
+                "Travel": [
+                    ["broadcast", "Split"],
+                    ["die"]
+                ]
+            }
+        }
+    },
+    "hormones": {
+        "0;0": "Split"
+    },
+    "hormonecolors": {
+        "Split": "Red",
+        "Travel": "Pink"
+    }
+}
